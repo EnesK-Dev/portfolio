@@ -1,0 +1,6 @@
+body { font-family: sans-serif; transition: 0.3s; padding: 20px; line-height: 1.6; }
+.dark-mode { background: #1a1a1a; color: white; }
+.project-card { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px; }
+nav { display: flex; justify-content: space-between; align-items: center; }
+form { display: flex; flex-direction: column; max-width: 400px; gap: 10px; }
+input, textarea { padding: 10px; border-radius: 4px; border: 1px solid #ddd; }
