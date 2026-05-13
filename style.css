@@ -307,10 +307,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 80px 0 100px;
+    padding: 80px 30px 100px;
     gap: 16px;
     align-self: stretch;
     animation: fadeUp 0.8s 0.15s var(--ease) both;
+    margin-bottom: 100px;
   }
   
   .index-line {
@@ -539,6 +540,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    font-size: 1rem;
   }
   
   .contact-links a {
@@ -550,6 +552,7 @@
     align-items: center;
     gap: 10px;
     transition: color var(--dur);
+    font-size: 1rem;
   }
   .contact-links a::before {
     content: '—';
@@ -726,7 +729,7 @@
       padding: 64px 24px 0;
       gap: 0;
     }
-    .hero::before, .hero::after { display: none; }
+    .hero::before, .hero::after { display: none;}
   
     .hero-inner { padding: 60px 0 48px; }
   
@@ -738,7 +741,7 @@
       align-self: auto;
       flex-wrap: wrap;
     }
-    .index-line { border-left: none; border-top: 1px solid var(--border); padding: 10px 0 0; }
+    .index-line { border-left: none; border-top: 1px solid var(--border); padding: 10px 0 0;}
   
     .about-strip,
     .projects-section,

@@ -70,45 +70,9 @@
 
     <div id="projects-container" class="projects-grid">
       <!-- AJAX fills here -->
-      <article class="project-card">
-        <div class="card-head">
-          <span class="card-num">001</span>
-          <span class="card-tag">Full Stack</span>
-        </div>
-        <h3 class="card-title">Project Alpha</h3>
-        <p class="card-desc">A sophisticated web application built with modern architecture and deployed at scale.</p>
-        <div class="card-tech">
-          <span>React</span><span>Node.js</span><span>PostgreSQL</span>
-        </div>
-        <a href="#" class="card-link">View Case <span>→</span></a>
-      </article>
-
-      <article class="project-card card-featured">
-        <div class="card-head">
-          <span class="card-num">002</span>
-          <span class="card-tag">Mobile</span>
-        </div>
-        <h3 class="card-title">Project Beta</h3>
-        <p class="card-desc">Cross-platform mobile solution delivering seamless user experience across devices.</p>
-        <div class="card-tech">
-          <span>Flutter</span><span>Firebase</span><span>Dart</span>
-        </div>
-        <a href="#" class="card-link">View Case <span>→</span></a>
-      </article>
-
-      <article class="project-card">
-        <div class="card-head">
-          <span class="card-num">003</span>
-          <span class="card-tag">Data</span>
-        </div>
-        <h3 class="card-title">Project Gamma</h3>
-        <p class="card-desc">Data pipeline and analytics platform processing millions of records daily.</p>
-        <div class="card-tech">
-          <span>Python</span><span>Spark</span><span>Airflow</span>
-        </div>
-        <a href="#" class="card-link">View Case <span>→</span></a>
-      </article>
     </div>
+
+    
   </section>
 
   <section id="contact-section" class="contact-section">
