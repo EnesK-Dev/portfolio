@@ -36,6 +36,9 @@
   
     --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --dur:         0.3s;
+
+    --book-shadow: 0px 0px 40px rgba(230, 225, 225, 0.3);
+    --book-inv-shadow: rgba(0, 0, 0, 0.5);
     scroll-behavior: smooth;
   }
   
@@ -53,6 +56,9 @@
   
     --accent:      #0c0c0c;
     --accent-inv:  #f5f5f5;
+
+    --book-shadow: 0px 0px 100px rgb(0, 0, 0);
+    --book-inv-shadow: rgb(0, 0, 0);
   }
   
   /* ---------- Reset ---------- */
@@ -769,6 +775,7 @@
     z-index: 9999;
     width: 150px;
     height: 150px;
+    pointer-events: auto;
 }
 
 .fixed-image-container img {
@@ -800,4 +807,608 @@
 .fixed-image-container:hover .hover-gif {
     opacity: 1;
     visibility: visible;
+}
+
+
+
+
+/* İsmin ve kitabın yan yana durması için */
+.name-with-book {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* İsimle kitap arasındaki boşluk */
+}
+
+/* KİTAP TASARIMI */
+.book-container {
+  position: relative;
+  width: 130px;  /* Başlığın yanına sığacak ideal boyut */
+  height: 180px;
+  perspective: 1200px; /* 3D derinlik algısı */
+  cursor: pointer;
+  font-family: monospace; /* Yazılımcı temasına uygun font */
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.book-cover, .book-inside {
+  position: absolute;
+  top: 200px; left: 0;
+  width: 500px; height: 650px;
+  border-radius: 2px 15px 15px 2px; /* Sağ tarafa kitap kıvrımı */
+  transition: transform 4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-style: preserve-3d;
+
+}
+
+/* Ön Kapak */
+.book-cover {
+  /* Dark modda koyu, light modda hafif açılan degrade */
+  background: linear-gradient(90deg, #201f1f 0%, #0a0a0a 40%);
+  
+  /* Senin kodundaki mevcut border değişkenini kullanıyoruz */
+  border: 1px solid var(--border-mid);
+  border-left: 2px solid #3e3e3e; 
+  
+  transform-origin: left center;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  
+  /* Yukarıda yeni tanımladığımız tema duyarlı shadow */
+  box-shadow: var(--book-shadow);
+  
+  /* Tema değişiminde renklerin akması için */
+  transition: transform 2.5s var(--ease);
+}
+
+
+.cover-text {
+  color: #fffcfc;
+  font-size: 70px;
+  font-weight: bold;
+  font-family: DeathNote;
+  margin-top: 3rem;
+}
+
+/* İç Sayfa */
+.book-inside {
+  background-color: #e0e0e0; /* Sayfa rengi (okunabilirlik için açık) */
+  color: #111; /* İç yazı koyu */
+  z-index: 1;
+  padding: 60px 20px 0px 40px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  
+}
+
+.book-inside p {
+  font-size: 1 rem;
+  line-height: 1.5;
+  margin: 0;
+  font-family:var(--font-mono);
+}
+
+/* AÇILMA ANİMASYONU (JS bu class'ı tetikleyecek) */
+.book-container.open .book-cover {
+  transform: rotateY(-140deg);
+}
+
+/* Kapak açılınca arkasında gölge oluşsun */
+.book-container.open .book-inside {
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
+}
+
+.book-container:hover .book-cover {
+  /* Gölge rengini daha belirgin veya farklı bir tona çekiyoruz */
+  box-shadow:0px 0px 20px rgb(255, 255, 255);
+  
+}
+
+/* =====================================================
+   AUTH (login) & ADMIN — portfolio-aligned UI
+   ===================================================== */
+
+body.page-auth,
+body.page-admin {
+  padding-left: 0;
+  min-height: 100vh;
+}
+
+/* ---------- Login ---------- */
+body.page-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.auth-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(240, 240, 240, 0.08), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(240, 240, 240, 0.04), transparent 50%);
+  border-top: 1px solid var(--border);
+}
+
+.auth-main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 20px 48px;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  color: var(--text-2);
+  transition: color var(--dur);
+}
+.auth-brand:hover { color: var(--text-1); }
+
+.auth-brand-initials {
+  font-family: var(--font-dn);
+  font-size: 1.75rem;
+  color: var(--text-1);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.auth-brand-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 32px 28px 28px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+.auth-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.auth-title {
+  font-family: var(--font-dn);
+  font-size: 2.25rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.auth-lead {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  margin-bottom: 24px;
+}
+
+.auth-alert {
+  background: rgba(180, 60, 60, 0.12);
+  border: 1px solid rgba(200, 80, 80, 0.35);
+  color: #e8a0a0;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.auth-field input {
+  width: 100%;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-mid);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 12px 14px;
+  transition: border-color var(--dur), box-shadow var(--dur);
+}
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--text-2);
+  box-shadow: 0 0 0 1px var(--text-3);
+}
+
+.auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 14px 20px;
+  background: var(--text-1);
+  color: var(--accent-inv);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity var(--dur), transform var(--dur);
+}
+.auth-submit:hover { opacity: 0.92; transform: translateY(-1px); }
+
+.auth-submit-arrow { font-size: 1rem; line-height: 1; }
+
+.auth-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+.auth-footer a {
+  color: var(--text-2);
+  transition: color var(--dur);
+}
+.auth-footer a:hover { color: var(--text-1); }
+
+/* ---------- Admin ---------- */
+body.page-admin {
+  padding-bottom: 48px;
+}
+
+.admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(12, 12, 12, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+html[data-theme="light"] .admin-topbar {
+  background: rgba(245, 245, 245, 0.92);
+}
+
+.admin-topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-topbar-mark {
+  font-family: var(--font-dn);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.admin-topbar-title {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+
+.admin-topbar-sub {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+}
+
+.admin-card-wide {
+  margin-top: 20px;
+  padding: 24px 22px 28px;
+}
+
+.admin-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+
+.admin-card-title {
+  font-family: var(--font-dn);
+  font-size: 1.65rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.admin-field input,
+.admin-field textarea {
+  width: 100%;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-mid);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 11px 12px;
+  resize: vertical;
+  min-height: 44px;
+  transition: border-color var(--dur);
+}
+.admin-field textarea { min-height: 120px; line-height: 1.5; }
+.admin-field input:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--text-2);
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 11px 18px;
+  border: 1px solid var(--border-mid);
+  background: transparent;
+  color: var(--text-1);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--dur), background var(--dur), color var(--dur);
+}
+.admin-btn:hover {
+  border-color: var(--text-2);
+  color: var(--text-1);
+}
+
+.admin-btn-primary {
+  background: var(--text-1);
+  color: var(--accent-inv);
+  border-color: var(--text-1);
+}
+.admin-btn-primary:hover {
+  opacity: 0.9;
+  border-color: var(--text-1);
+}
+
+.admin-btn-ghost {
+  color: var(--text-2);
+}
+
+.admin-btn-danger-outline {
+  border-color: rgba(200, 90, 90, 0.45);
+  color: #d08080;
+}
+.admin-btn-danger-outline:hover {
+  background: rgba(180, 60, 60, 0.12);
+  border-color: rgba(220, 100, 100, 0.6);
+  color: #e8a0a0;
+}
+
+.admin-btn-small {
+  padding: 8px 14px;
+  font-size: 0.6rem;
+}
+
+.admin-btn-icon {
+  padding: 8px 12px;
+  flex-shrink: 0;
+}
+
+.admin-btn.danger,
+.admin-btn-icon.danger {
+  border-color: rgba(200, 90, 90, 0.4);
+  color: #c07070;
+}
+.admin-btn.danger:hover,
+.admin-btn-icon.danger:hover {
+  background: rgba(180, 60, 60, 0.12);
+  color: #e09090;
+}
+
+.admin-project-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.admin-project-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.admin-project-body { min-width: 0; flex: 1; }
+
+.admin-project-name {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 6px;
+  font-family: var(--font-body);
+}
+
+.admin-project-desc {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.admin-inline-form {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.admin-empty {
+  color: var(--text-3);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.admin-messages-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-messages-hint {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  max-width: 280px;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .admin-messages-hint { text-align: left; max-width: none; }
+}
+
+.admin-message-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.admin-message-card {
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-message-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-message-meta strong {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.admin-message-date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+.admin-message-email {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-2);
+  word-break: break-all;
+  transition: color var(--dur);
+}
+.admin-message-email:hover { color: var(--text-1); }
+
+.admin-message-text {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  flex: 1;
+  margin-top: 4px;
+}
+
+.admin-message-actions {
+  margin: 10px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
 }

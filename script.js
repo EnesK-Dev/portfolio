@@ -197,3 +197,45 @@
     });
   
   })();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const magicBook = document.getElementById('magicBook');
+    if (magicBook) {
+        magicBook.addEventListener('click', function() {
+            // "open" class'ını ekler veya çıkarır
+            this.classList.toggle('open');
+        });
+    }
+    const container = document.getElementById('gifContainer');
+  const sound = document.getElementById('hoverSound');
+
+  // Tarayıcı kısıtlamasını kaldırmak için:
+  // Kullanıcı sayfada herhangi bir yere tıkladığı an sesi "hazır" hale getiriyoruz.
+  const unlockAudio = () => {
+      if (!sound) {
+          document.removeEventListener('click', unlockAudio);
+          return;
+      }
+      sound.play().then(() => {
+          sound.pause();
+          sound.currentTime = 0;
+      }).catch(function () { /* ilk tıklamadan önce sessizce */ });
+      document.removeEventListener('click', unlockAudio);
+  };
+  document.addEventListener('click', unlockAudio);
+
+  if (container && sound) {
+      container.addEventListener('mouseenter', () => {
+          sound.currentTime = 0;
+          // Volume senin için önemliyse elinle 1 yapabilirsin
+          sound.volume = 1.0; 
+          sound.play().catch(e => {
+              console.log("Oynatma için sayfaya bir kez tıklamalısın.");
+          });
+      });
+
+      container.addEventListener('mouseleave', () => {
+          sound.pause();
+      });
+  }
+});

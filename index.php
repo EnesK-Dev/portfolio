@@ -48,6 +48,17 @@
       </div>
       <a href="#projects-section" class="hero-cta">View Work <span class="arrow">↓</span></a>
     </div>
+    <div class="book-container" id="magicBook">
+            <div class="book-inside">
+              <p> I am a Software Engineering student at Haliç University with a passion for logic puzzles and technical craftsmanship. My approach to development is defined by precision and a deep interest in the architectural "how" behind every line of code.
+
+I operate primarily within Linux (Ubuntu) environments to maintain a focused and efficient workflow. Whether I’m navigating complex technical challenges or maintaining discipline on the football pitch as a defender, I thrive in environments that require strategy and resilience.
+
+I am currently seeking a mandatory software engineering internship for the Summer 2026 period to bring my problem-solving mindset to a professional team.</p>  </div>
+            <div class="book-cover">
+              <span class="cover-text">ABOUT  ME</span>
+            </div>
+          </div>
     <div class="hero-index">
       <div class="index-line"><span>01</span><span>About</span></div>
       <div class="index-line"><span>02</span><span>Projects</span></div>
@@ -72,7 +83,7 @@
       <!-- AJAX fills here -->
     </div>
 
-    
+
   </section>
 
   <section id="contact-section" class="contact-section">
@@ -117,9 +128,10 @@
     <span class="footer-copy">© <span id="foot-year"></span> — Built with precision.</span>
     <span class="footer-badge">DN</span>
   </footer>
-  <div class="fixed-image-container">
+  <div class="fixed-image-container" id="gifContainer">
     <img src="death-note/ryuk_static.png" alt="Alt Sağ Resim" class="static-img">
     <img src="death-note/ryuk_active.gif" alt="Alt Sağ Resim" class="hover-gif">
+    <audio id="hoverSound" src="death-note/hoverSound.mp3" preload="auto"></audio>
   </div>
 
   <script src="script.js"></script>
