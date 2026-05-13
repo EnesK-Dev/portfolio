@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Ödev gereği basit ama güvenli kontrol
-    if ($username === "admin" && $password === "1234") {
+    if ($username === "admin" && $password === "E123_4") {
         $_SESSION['admin_logged_in'] = true;
         header("Location: admin.php");
         exit();
