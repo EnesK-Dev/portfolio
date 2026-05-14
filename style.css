@@ -39,6 +39,9 @@
 
     --book-shadow: 0px 0px 40px rgba(230, 225, 225, 0.3);
     --book-inv-shadow: rgba(0, 0, 0, 0.5);
+
+    /* Hero rain — açık damla uçları (koyu arka plan) */
+    --rain-drop-strong: rgba(240, 240, 240, 0.42);
     scroll-behavior: smooth;
   }
   
@@ -59,6 +62,9 @@
 
     --book-shadow: 0px 0px 100px rgb(0, 0, 0);
     --book-inv-shadow: rgb(0, 0, 0);
+
+    /* Hero rain — koyu damla uçları (açık arka plan) */
+    --rain-drop-strong: rgba(12, 12, 12, 0.2);
   }
   
   /* ---------- Reset ---------- */
@@ -76,7 +82,7 @@
     line-height: 1.7;
     overflow-x: hidden;
     transition: background-color 0.4s, color 0.4s;
-    padding-left: 50px;
+    padding: 0px 50px 0px 50px;
   }
   
   a { color: inherit; text-decoration: none; }
@@ -857,7 +863,7 @@
   
   /* Yukarıda yeni tanımladığımız tema duyarlı shadow */
   box-shadow: var(--book-shadow);
-  
+
   /* Tema değişiminde renklerin akması için */
   transition: transform 2.5s var(--ease);
 }
@@ -877,9 +883,10 @@
   color: #111; /* İç yazı koyu */
   z-index: 1;
   padding: 60px 20px 0px 40px;
-  border: 1px solid #ccc;
+  border-style: solid;
+  border-color: #202020;
+  border-width: 15px 15px 15px 0px;
   overflow: hidden;
-  
 }
 
 .book-inside p {
@@ -896,7 +903,7 @@
 
 /* Kapak açılınca arkasında gölge oluşsun */
 .book-container.open .book-inside {
-  box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
+  box-shadow:0px 0px 20px rgb(255, 255, 255);
 }
 
 .book-container:hover .book-cover {
@@ -904,6 +911,41 @@
   box-shadow:0px 0px 20px rgb(255, 255, 255);
   
 }
+
+/* Hero dikey çizgileriyle aynı iç boşluk: ::before left:56px, ::after right:56px */
+.rain {
+  position: absolute;
+  top: 0;
+  left: 56px;
+  width: calc(100% - 112px);
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .rain {
+    left: 24px;
+    width: calc(100% - 48px);
+  }
+}
+
+.rain span {
+  position: absolute;
+  top: -150px;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--rain-drop-strong));
+  animation: rain-fall linear infinite;
+  border-radius: 0 0 2px 2px;
+}
+
+@keyframes rain-fall {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(110vh); }
+}
+
 
 /* =====================================================
    AUTH (login) & ADMIN — portfolio-aligned UI

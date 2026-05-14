@@ -239,3 +239,17 @@
       });
   }
 });
+
+const rain = document.getElementById('rain');
+  const dropCount = 90;
+
+  for (let i = 0; i < dropCount; i++) {
+    const drop = document.createElement('span');
+    drop.style.left = Math.random() * 100 + '%';
+    drop.style.animationDuration = (0.4 + Math.random() * 0.6) + 's';
+    drop.style.animationDelay = (Math.random() * 2) + 's';
+    drop.style.opacity = 0.2 + Math.random() * 0.5;
+    drop.style.height = (60 + Math.random() * 60) + 'px';
+    drop.style.width = (Math.random() > 0.5 ? 1 : 1.5) + 'px';
+    rain.appendChild(drop);
+  }

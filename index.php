@@ -25,8 +25,9 @@
   </nav>
 
   <header class="hero">
+  <div class="rain" id="rain"></div>
     <div class="hero-inner">
-      <div class="hero-eyebrow">Full-Stack Developer — Mobile</div>
+      <div class="hero-eyebrow">Full-Stack/Mobile Devoloper</div>
       <h1 class="hero-heading">
         <span class="line">Enes</span>
         <span class="line">Kucukkaya</span>
@@ -42,7 +43,7 @@
           <span class="meta-label">Years Exp.</span>
         </div>
         <div class="meta-item">
-          <span class="meta-num">∞</span>
+          <span class="meta-num">999</span>
           <span class="meta-label">Curiosity</span>
         </div>
       </div>
